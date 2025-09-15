@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+struct File {
+    char name[20];
+};
+
+int main() {
+    int n;
+    struct File files[50];
+
+    printf("Enter number of files: ");
+    scanf("%d", &n);
+
+    for (int i = 0; i < n; i++) {
+        printf("Enter file name: ");
+        scanf("%s", files[i].name);
+    }
+
+    printf("\nDirectory Listing:\n");
+    for (int i = 0; i < n; i++) {
+        printf("%s\n", files[i].name);
+    }
+    return 0;
+}
+//
+Enter number of files: 3
+Enter file name: file1.txt
+Enter file name: file2.txt
+Enter file name: file3.txt
+
+Directory Listing:
+file1.txt
+file2.txt
+file3.txt

@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int compare(const void *a, const void *b) {
+    return (*(int*)a - *(int*)b);
+}
+
+int main() {
+    int queue[100], n, head, i, disk_size, direction;
+    printf("Enter number of requests: ");
+    scanf("%d", &n);
+    printf("Enter requests:\n");
+    for(i = 0; i < n; i++)
+        scanf("%d", &queue[i]);
+    printf("Enter initial head position: ");
+    scanf("%d", &head);
+    printf("Enter disk size: ");
+    scanf("%d", &disk_size);
+    printf("Enter direction (0 for left, 1 for right): ");
+    scanf("%d", &direction);
+
+    qsort(queue, n, sizeof(int), compare);
+
+    printf("Servicing order:\n");
+    if(direction == 1) {
+        for(i = 0; i < n; i++) {
+            if(queue[i] >= head)
+                printf("%d -> ", queue[i]);
+        }
+        printf("%d -> ", disk_size - 1);
+        for(i = n - 1; i >= 0; i--) {
+            if(queue[i] < head)
+                printf("%d -> ", queue[i]);
+        }
+    } else {
+        for(i = n - 1; i >= 0; i--) {
+            if(queue[i] <= head)
+                printf("%d -> ", queue[i]);
+        }
+        printf("0 -> ");
+        for(i = 0; i < n; i++) {
+            if(queue[i] > head)
+                printf("%d -> ", queue[i]);
+        }
+    }
+    printf("End\n");
+    return 0;
+}
+input:
+Enter number of requests: 5
+Enter requests:
+40 10 50 20 30
+Enter initial head position: 25
+Enter disk size: 100
+Enter direction (0 for left, 1 for right): 1
+output:
+Servicing order:
+30 -> 40 -> 50 -> 99 -> 20 -> 10 -> End

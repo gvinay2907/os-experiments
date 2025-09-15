@@ -1,0 +1,20 @@
+# Create a file
+touch file.txt
+
+# View permissions
+ls -l file.txt
+
+# Change permissions
+chmod 644 file.txt  # Owner can read/write, others can read
+
+# View file details
+ls -l file.txt
+
+# Change ownership (requires sudo)
+sudo chown user2 file.txt
+
+# Change group (requires sudo)
+sudo chgrp staff file.txt
+// 
+output:
+-rw-r--r-- 1 user1 staff 0 Sep 14 10:00 file.txt

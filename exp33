@@ -1,0 +1,70 @@
+#include <stdio.h>
+
+int predict(int pages[], int frames[], int np, int n, int index) {
+    int farthest = index, pos = -1, i, j;
+    for(i = 0; i < n; i++) {
+        int j;
+        for(j = index; j < np; j++) {
+            if(frames[i] == pages[j]) {
+                if(j > farthest) {
+                    farthest = j;
+                    pos = i;
+                }
+                break;
+            }
+        }
+        if(j == np)
+            return i;
+    }
+    return (pos == -1) ? 0 : pos;
+}
+
+int main() {
+    int n, pages[50], frames[10], i, j, np, faults = 0, found;
+    printf("Enter number of frames: ");
+    scanf("%d", &n);
+    printf("Enter number of pages: ");
+    scanf("%d", &np);
+    printf("Enter pages sequence:\n");
+    for(i = 0; i < np; i++)
+        scanf("%d", &pages[i]);
+
+    for(i = 0; i < n; i++)
+        frames[i] = -1;
+
+    for(i = 0; i < np; i++) {
+        found = 0;
+        for(j = 0; j < n; j++) {
+            if(frames[j] == pages[i]) {
+                found = 1;
+                break;
+            }
+        }
+        if(!found) {
+            int replace = predict(pages, frames, np, n, i+1);
+            frames[replace] = pages[i];
+            faults++;
+            printf("Page fault: ");
+            for(j = 0; j < n; j++)
+                printf("%d ", frames[j]);
+            printf("\n");
+        }
+    }
+    printf("Total page faults = %d\n", faults);
+    return 0;
+}
+Enter number of frames: 3
+Enter number of pages: 9
+Enter pages sequence:
+7 0 1 2 0 3 0 4 2
+output:
+Page fault: 7 -1 -1 
+Page fault: 7 0 -1 
+Page fault: 7 0 1 
+Page fault: 2 0 1 
+Page fault: 2 0 1 
+Page fault: 2 3 1 
+Page fault: 2 3 0 
+Page fault: 4 3 0 
+Page fault: 4 2 0 
+Total page faults = 7

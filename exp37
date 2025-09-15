@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    int queue[100], n, head, i;
+    printf("Enter number of requests: ");
+    scanf("%d", &n);
+    printf("Enter requests:\n");
+    for(i = 0; i < n; i++)
+        scanf("%d", &queue[i]);
+    printf("Enter initial head position: ");
+    scanf("%d", &head);
+
+    printf("Order of servicing requests:\n");
+    for(i = 0; i < n; i++) {
+        printf("%d -> ", queue[i]);
+    }
+    printf("End\n");
+    return 0;
+}
+input:
+Enter number of requests: 4
+Enter requests:
+40 10 50 20
+Enter initial head position: 30
+output:
+Order of servicing requests:
+40 -> 10 -> 50 -> 20 -> End

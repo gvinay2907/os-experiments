@@ -1,0 +1,27 @@
+#include <stdio.h>
+
+int main() {
+    int records[100], n, i;
+    printf("Enter number of records: ");
+    scanf("%d", &n);
+
+    printf("Enter record values:\n");
+    for(i = 0; i < n; i++)
+        scanf("%d", &records[i]);
+
+    printf("Accessing records sequentially:\n");
+    for(i = 0; i < n; i++) {
+        printf("Record %d: %d\n", i+1, records[i]);
+    }
+    return 0;
+}
+//
+Enter number of records: 4
+Enter record values:
+10 20 30 40
+output:
+Accessing records sequentially:
+Record 1: 10
+Record 2: 20
+Record 3: 30
+Record 4: 40
